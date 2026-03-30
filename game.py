@@ -118,6 +118,8 @@ class SpaceShooter(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.fillRect(self.rect(), QColor(135, 206, 235))
+        painter.setBrush(QColor(0, 105, 148))
+        painter.drawRect(0, HEIGHT - 100, WIDTH, 100)
 
         self.draw_player(painter)
 
