@@ -1,19 +1,11 @@
 import pytest
 from game import SpaceShooter
-from PySide6.QtWidgets import QApplication
-from PySide6.QtCore import Qt
-import sys
-
-
-@pytest.fixture(scope="module")
-def app():
-    app = QApplication(sys.argv)
-    yield app
 
 
 @pytest.fixture
-def game(app):
+def game(qtbot):
     g = SpaceShooter()
+    qtbot.addWidget(g)
     g.timer.stop()
     return g
 
@@ -34,6 +26,7 @@ def test_bullet_moves_up(game):
     game.shoot()
     bullet = game.bullets[0]
     initial_y = bullet.y()
+
     game.game_loop()
 
     assert bullet.y() < initial_y
